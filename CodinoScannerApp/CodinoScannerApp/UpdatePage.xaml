@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodinoScannerApp.UpdatePage">
+    <ContentPage.Content>
+        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5.75*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1.25*"/>
+
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button Text="UPDATE" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="0,0,0,10" BackgroundColor="#52c7b8" Clicked="Button_OnClicked"/>
+
+
+            <Frame CornerRadius="15" Grid.Row="2" BackgroundColor="#009688">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
+                    <Label Text="Document Location:" HorizontalOptions="CenterAndExpand"/>
+                    <RadioButton IsChecked="True" Content="Home" x:Name="rbHome" HorizontalOptions="CenterAndExpand"/>
+                    <RadioButton Grid.Column="1" Content="Away" x:Name="rbAway" HorizontalOptions="CenterAndExpand"/>
+                </Grid>
+            </Frame>
+
+            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="#009688">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
+                    <Label Text="Document Name:" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Black" Grid.Row="0"/>
+                    <Frame CornerRadius="15">
+                        <Editor x:Name="tbxDocumentName" Placeholder="Document Name" PlaceholderColor="Gray" TextColor="Black"/>
+                    </Frame>
+                    <Frame CornerRadius="15" Grid.Column="1">
+                        <Editor x:Name="tbxDocumentDescription" Placeholder="Document Description" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="White" Grid.Column="1"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

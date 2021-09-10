@@ -1,65 +1,68 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CodinoScannerApp.QRScanner"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
-             NavigationPage.IconColor="White"
-             >
-     
+             NavigationPage.IconColor="White">
+
     <ContentPage.Content>
 
         <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5.75*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1.25*"/>
-                
+                <RowDefinition Height="5.75*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1.25*" />
+
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
 
-            
-                <Button Text="UPDATE" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="0,0,0,10" BackgroundColor="#52c7b8"/>
+
+            <Button Text="UPDATE" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="0,0,0,10"
+                    BackgroundColor="#52c7b8" />
 
 
             <Frame CornerRadius="15" Grid.Row="2" BackgroundColor="#009688">
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
-                <Label Text="Document Location:" HorizontalOptions="CenterAndExpand"/>
-                <RadioButton IsChecked="True" Content="Home" HorizontalOptions="CenterAndExpand"/>
-                <RadioButton Grid.Column="1" Content="Away" HorizontalOptions="CenterAndExpand"/>
-            </Grid>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
+                    <Label Text="Document Location:" HorizontalOptions="CenterAndExpand" />
+                    <RadioButton IsChecked="True" Content="Home" HorizontalOptions="CenterAndExpand" />
+                    <RadioButton Grid.Column="1" Content="Away" HorizontalOptions="CenterAndExpand" />
+                </Grid>
             </Frame>
 
             <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="#009688">
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
-                    <Label Text="Document Name:" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Black" Grid.Row="0"/>
+                    <Label Text="Document Name:" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                           TextColor="Black" Grid.Row="0" />
                     <Frame CornerRadius="15">
-                        <Editor x:Name="tbxDocumentName" Placeholder="Document Name" PlaceholderColor="Gray" TextColor="Black"/>
+                        <Editor x:Name="tbxDocumentName" Placeholder="Document Name" PlaceholderColor="Gray"
+                                TextColor="Black" />
                     </Frame>
                     <Frame CornerRadius="15" Grid.Column="1">
-                        <Editor x:Name="tbxDocumentDescription" Placeholder="Document Description" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="White" Grid.Column="1"/>
+                        <Editor x:Name="tbxDocumentDescription" Placeholder="Document Description"
+                                PlaceholderColor="Gray" TextColor="Black" BackgroundColor="White" Grid.Column="1" />
                     </Frame>
                 </Grid>
             </Frame>
 
-             <Frame CornerRadius="15" Grid.Row="0" BackgroundColor="Black" Margin="10,10,10,3">
-            <zxing:ZXingScannerView Grid.Column="0" Grid.Row="0" Margin="10,0,10,10"
-                x:Name="scanView"
-                OnScanResult="scanView_OnScanResult"
-                IsScanning="True"
-                WidthRequest="600"
-                HeightRequest="600"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+            <Frame CornerRadius="15" Grid.Row="0" BackgroundColor="Black" Margin="10,10,10,3">
+                <zxing:ZXingScannerView Grid.Column="0" Grid.Row="0" Margin="10,0,10,10"
+                                        x:Name="scanView"
+                                        IsScanning="True"
+                                        OnScanResult="scanView_OnScanResult"
+                                        WidthRequest="600"
+                                        HeightRequest="600"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center" />
             </Frame>
             <Frame CornerRadius="15" Grid.Row="0" BackgroundColor="Transparent">
-                <zxing:ZXingDefaultOverlay  TopText="Align the QR Code with the frame" Grid.Column="0" Grid.Row="0" Margin="10,0,10,10"/>
+                <zxing:ZXingDefaultOverlay TopText="Align the QR Code with the frame" Grid.Column="0" Grid.Row="0"
+                                           Margin="10,0,10,10" />
             </Frame>
-
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>
