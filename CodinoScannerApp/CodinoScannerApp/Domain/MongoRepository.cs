@@ -21,13 +21,17 @@ namespace CodinoScannerApp.Domain
         {
             string connectionString =
                 @"mongodb://admin:aPdP6AP3zCFER4t6hMPSLKsolAbFxOVzJ2PLuqRvAMZTMPo0Cs@noxdev.ddns.net:40373/?authSource=admin&ssl=true";
-            MongoClientSettings settings = MongoClientSettings.FromUrl(
-                new MongoUrl(connectionString));
+            var url = new MongoUrl(connectionString);
+
+            MongoClientSettings settings = MongoClientSettings.FromUrl(url);
+
+
             settings.SslSettings =
                 new SslSettings()
                 {
                     CheckCertificateRevocation = false
                 };
+            
             settings.AllowInsecureTls = true;
 
             _dbClient = new MongoClient(settings);
