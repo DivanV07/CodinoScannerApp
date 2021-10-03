@@ -10,7 +10,7 @@ namespace CodinoScannerApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainMenu());
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

@@ -3,31 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodinoScannerApp.Domain;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CodinoScannerApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainMenu : ContentPage
+    public partial class LoginPage : ContentPage
     {
-        //todo setup this stuff properly later
-        
-        public MainMenu()
+        public LoginPage()
         {
             InitializeComponent();
-       
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-        IRepositoryInterface repo = new MongoRepository("localhost");
-             var qr = new QRScanner(repo);
-             NavigationPage.SetHasNavigationBar(qr, false);
-            await Navigation.PushAsync(qr);
-
-            
+            await DisplayAlert("Alert", "Log in complete", "Continue");
+            var mainmenu = new MainMenu();
+            NavigationPage.SetHasNavigationBar(mainmenu, false);
+            await Navigation.PushAsync(mainmenu);
         }
     }
 }
