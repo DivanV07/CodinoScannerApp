@@ -30,7 +30,7 @@
             </Frame>
 
             <Frame Grid.Column="0" Grid.Row="2" CornerRadius="15"  BackgroundColor="#52c7b8"  Margin="5,5,5,15">
-                <Button Text="Go to scanner" Clicked="Button_Clicked" BackgroundColor="Gray" CornerRadius="15" FontSize="35" FontAttributes="Bold"></Button>
+                <Button Text="Scan Document" Clicked="Button_Clicked" BackgroundColor="Gray" CornerRadius="15" FontSize="35" FontAttributes="Bold"></Button>
             </Frame>
 
            

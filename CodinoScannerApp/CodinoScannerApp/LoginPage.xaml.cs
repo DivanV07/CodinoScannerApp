@@ -17,7 +17,7 @@ namespace CodinoScannerApp
             InitializeComponent();
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void btnLogin_Clicked(object sender, EventArgs e)
         {
             await DisplayAlert("Alert", "Log in complete", "Continue");
             var mainmenu = new MainMenu();
