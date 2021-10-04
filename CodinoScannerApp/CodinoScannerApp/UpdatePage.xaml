@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CodinoScannerApp.UpdatePage">
     <ContentPage.Content>
-        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="#393E46">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5.75*"/>
                 <RowDefinition Height="3*"/>
+                <RowDefinition Height="4*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="1.25*"/>
+                <RowDefinition Height="1*"/>
 
             </Grid.RowDefinitions>
 
@@ -17,20 +17,24 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button Text="UPDATE" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="0,0,0,10" BackgroundColor="#52c7b8" Clicked="Button_OnClicked"/>
+            <Frame Grid.Row="0" CornerRadius="15" BackgroundColor="#222831" Margin="10,10,10,10">
+                <Image Source="https://i.imgur.com/quAEhDr.png"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            </Frame>
+
+            <Button Text="UPDATE" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="10,0,10,10" BackgroundColor="#385170" Clicked="Button_OnClicked" TextColor="White"/>
 
 
-            <Frame CornerRadius="15" Grid.Row="2" BackgroundColor="#009688">
+            <Frame CornerRadius="15" Grid.Row="2" BackgroundColor="#142D4C" Margin="10,0,10,10">
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
-                    <Label Text="Document Location:" HorizontalOptions="CenterAndExpand"/>
-                    <RadioButton IsChecked="True" Content="Home" x:Name="rbHome" HorizontalOptions="CenterAndExpand"/>
-                    <RadioButton Grid.Column="1" Content="Away" x:Name="rbAway" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="Document Location:" HorizontalOptions="CenterAndExpand" TextColor="Gray"/>
+                    <RadioButton IsChecked="True" Content="Home" x:Name="rbHome" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                    <RadioButton Grid.Column="1" Content="Away" x:Name="rbAway" HorizontalOptions="CenterAndExpand" TextColor="White"/>
                 </Grid>
             </Frame>
 
-            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="#009688">
+            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="#142D4C" Margin="10,0,10,10">
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Grid.Row="1" BackgroundColor="Transparent">
-                    <Label Text="Document Name:" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Black" Grid.Row="0"/>
+                    <Label Text="Document Name:" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Gray" Grid.Row="0"/>
                     <Frame CornerRadius="15">
                         <Editor x:Name="tbxDocumentName" Placeholder="Document Name" PlaceholderColor="Gray" TextColor="Black"/>
                     </Frame>

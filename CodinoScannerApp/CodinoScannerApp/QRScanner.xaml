@@ -8,10 +8,10 @@
 
     <ContentPage.Content>
 
-        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="#393E46">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
-                <RowDefinition Height="7*" />
+                <RowDefinition Height="4*" />
                 <RowDefinition Height="3*" />
                
 
@@ -22,17 +22,17 @@
             </Grid.ColumnDefinitions>
 
 
-            <Frame Grid.Row="0" CornerRadius="15" BackgroundColor="#52c7b8" Margin="10,10,10,10">
-                <Image Source="https://i.imgur.com/KneonPJ.png" HeightRequest="90" VerticalOptions="CenterAndExpand"/>
+            <Frame Grid.Row="0" CornerRadius="15" BackgroundColor="#222831" Margin="10,10,10,10">
+                <Image Source="https://i.imgur.com/quAEhDr.png"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
             </Frame>
 
-            <Button Text="Cancel" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="0,0,0,10"
-                    BackgroundColor="#52c7b8" />
+            <Button Text="Cancel" Grid.Column="0" Grid.Row="3" CornerRadius="15" Margin="10,0,10,10"
+                    BackgroundColor="#385170" />
 
 
 
 
-            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="LightGray" Margin="10,10,10,3">
+            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="#142D4C" Margin="10,0,10,10" HorizontalOptions="Center" Grid.RowSpan="2">
                 <zxing:ZXingScannerView Grid.Column="0" Grid.Row="0" Margin="10,0,10,10"
                                         x:Name="scanView"
                                         IsScanning="True"
@@ -42,7 +42,7 @@
                                         VerticalOptions="Center"
                                         HorizontalOptions="Center" />
             </Frame>
-            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="Transparent">
+            <Frame CornerRadius="15" Grid.Row="1" BackgroundColor="Transparent" Grid.RowSpan="2">
                 <zxing:ZXingDefaultOverlay TopText="Align the QR Code with the frame" Grid.Column="0" Grid.Row="0"
                                            Margin="10,0,10,10" />
             </Frame>

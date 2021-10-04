@@ -20,6 +20,7 @@ namespace CodinoScannerApp
         {
             //Todo Need to add a way for users to set the IP here --- Shared preferences access / cfg file / i have no idea
             _repo = new MongoRepository("localhost");
+            
             InitializeComponent();
         }
 
