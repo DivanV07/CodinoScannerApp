@@ -42,6 +42,30 @@ namespace CodinoScannerApp
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             //do validation of some kind?
+            if (!string.IsNullOrWhiteSpace(tbxDocumentDescription.Text) &&
+                !string.IsNullOrWhiteSpace(tbxDocumentName.Text))
+            {
+                //update
+                _currDoc.DocumentName = tbxDocumentName.Text;
+                _currDoc.DocumentDescription = tbxDocumentDescription.Text;
+                if (rbHome.IsChecked)
+                {
+                    _currDoc.DocumentLocation = "Home";
+                }
+                else
+                {
+                    _currDoc.DocumentLocation = "Away";
+                }
+
+
+                await _repo.UpdateDocument(_currDoc);
+                await DisplayAlert("Success", "Document Successfully Updated", "Ok");
+                SendBackButtonPressed();
+            }
+            else
+            {
+                await DisplayAlert("Error", "Invalid Document Name or Description", "Ok");
+            }
         }
 
 
@@ -49,7 +73,7 @@ namespace CodinoScannerApp
         protected override bool OnBackButtonPressed()
         {
             var pages = Navigation.NavigationStack.ToList();
-            Navigation.RemovePage(pages[1]);
+            Navigation.RemovePage(pages[2]);
             return base.OnBackButtonPressed();
         }
     }

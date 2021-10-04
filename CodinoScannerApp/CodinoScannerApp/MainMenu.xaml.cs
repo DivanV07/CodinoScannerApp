@@ -13,21 +13,20 @@ namespace CodinoScannerApp
     public partial class MainMenu : ContentPage
     {
         //todo setup this stuff properly later
-        
-        public MainMenu()
+        private IRepositoryInterface _repo;
+
+        public MainMenu(IRepositoryInterface repo)
         {
+            _repo = repo;
             InitializeComponent();
        
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-        IRepositoryInterface repo = new MongoRepository("localhost");
-             var qr = new QRScanner(repo);
+            var qr = new QRScanner(_repo);
              NavigationPage.SetHasNavigationBar(qr, false);
             await Navigation.PushAsync(qr);
-
-            
         }
     }
 }
