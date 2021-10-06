@@ -60,7 +60,6 @@ namespace CodinoScannerApp
 
                 await _repo.UpdateDocument(_currDoc);
                 await DisplayAlert("Success", "Document Successfully Updated", "Ok");
-                SendBackButtonPressed();
             }
             else
             {
