@@ -14,92 +14,72 @@ namespace CodinoScannerApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QRScanner : ContentPage
     {
-
-        bool bScanned= true;
+        bool bScanned = true;
         private IRepositoryInterface _repo;
-       
+
 
         public QRScanner(IRepositoryInterface repo)
         {
             InitializeComponent();
             var grid = new Grid();
-            var row = new RowDefinition() { Height = new GridLength(120)};
-            var row2 = new RowDefinition() { Height = new GridLength(60)};
-            var row3 = new RowDefinition() { Height = new GridLength(80)};
+            var row = new RowDefinition() { Height = new GridLength(120) };
+            var row2 = new RowDefinition() { Height = new GridLength(60) };
+            var row3 = new RowDefinition() { Height = new GridLength(80) };
 
             bScanned = true;
             scanView.IsAnalyzing = true;
             _repo = repo;
-
         }
-        
+
 
         private void scanView_OnScanResult(ZXing.Result result)
         {
             Device.BeginInvokeOnMainThread(async () =>
+            {
+                if (bScanned)
                 {
-                    if (bScanned)
+                    bScanned = false;
+                    scanView.IsAnalyzing = false;
+                    if (!String.IsNullOrWhiteSpace(result.Text))
                     {
-                        bScanned = false;
-                        scanView.IsAnalyzing = false;
-                        if (!String.IsNullOrWhiteSpace(result.Text))
+                        bool validScan = false;
+                        Document doc = null;
+                        try
                         {
-                            string action = "";
-                            Document doc = null;
-                            try
+                            doc = await _repo.GetDocument(result.Text);
+                            if (doc == null)
                             {
-                                doc = await _repo.GetDocument(result.Text);
-                                if (doc == null)
-                                {
-                                    throw new Exception("doc not found");
-                                }
-                                action = await DisplayActionSheet(result.Text, "Cancel", "Update");
+                                throw new Exception("doc not found");
                             }
-                            catch (Exception e)
+                            validScan = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            await DisplayAlert("Error!", "Document not found, please try again.", "Ok");
+                            bScanned = true;
+                            scanView.IsAnalyzing = true;
+                        }
+
+                        if (validScan)
+                        {
+                            if (doc != null)
                             {
-                                Console.WriteLine(e.Message);
-                                await DisplayAlert("Error!", "Document not found, please try again.", "Ok");
-                                bScanned = true;
-                                scanView.IsAnalyzing = true;
-                            }
-                            
-                            if (action == "Update")
-                            {
-                                if(doc != null){
-                                    var update = new UpdatePage(_repo, result.Text);
-                                    update.PrepareWindow(doc);
-                                    NavigationPage.SetHasNavigationBar(update, false);
-                                    await Navigation.PushAsync(update);
-                                }
+                                var update = new UpdatePage(_repo, result.Text);
+                                update.PrepareWindow(doc);
+                                NavigationPage.SetHasNavigationBar(update, false);
+                                await Navigation.PushAsync(update);
                             }
                         }
                     }
-                });
+                }
+            });
         }
-        
-        private void ResetScanner() 
-        {
-            Task.Factory.StartNew(() => Thread.Sleep(2 * 1000))
-                        .ContinueWith((t) => {
-                            bScanned = false;
-                        }, TaskScheduler.FromCurrentSynchronizationContext());
-        }
+
 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
-            var mainmenu = new MainMenu(_repo);
-            NavigationPage.SetHasNavigationBar(mainmenu, false);
-            await Navigation.PushAsync(mainmenu);
-        }
-
-        protected override bool OnBackButtonPressed()
-        {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-               
-
-            });
-            return true;
+            await Navigation.PopAsync(true);
         }
     }
 }

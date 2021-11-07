@@ -15,6 +15,7 @@ namespace CodinoScannerApp
         private IRepositoryInterface _repo;
         private string _docID;
         private Document _currDoc;
+
         public UpdatePage(IRepositoryInterface repo, string docID)
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace CodinoScannerApp
                 rbAway.IsChecked = true;
             }
         }
-        
+
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
@@ -60,9 +61,10 @@ namespace CodinoScannerApp
 
                 await _repo.UpdateDocument(_currDoc);
                 await DisplayAlert("Success", "Document Successfully Updated", "Ok");
-                var mainmenu = new MainMenu(_repo);
-                NavigationPage.SetHasNavigationBar(mainmenu, false);
-                await Navigation.PushAsync(mainmenu);
+
+                var pages = Navigation.NavigationStack.ToList();
+                Navigation.RemovePage(pages[2]);
+                await Navigation.PopAsync(true);
             }
             else
             {
@@ -70,22 +72,19 @@ namespace CodinoScannerApp
             }
         }
 
-       
 
         protected override bool OnBackButtonPressed()
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var result = await this.DisplayAlert("Alert", "Cancel Update?", "Yes", "No");
-            if (result == true)
-            {
-                    var mainmenu = new MainMenu(_repo);
-                    NavigationPage.SetHasNavigationBar(mainmenu, false);
-                  await  Navigation.PushAsync(mainmenu);
-
+                if (result == true)
+                {
+                    var pages = Navigation.NavigationStack.ToList();
+                    Navigation.RemovePage(pages[2]);
+                    await Navigation.PopAsync(true);
                 }
-
-        });
+            });
             return true;
         }
     }

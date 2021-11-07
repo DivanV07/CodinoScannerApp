@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using CodinoScannerApp.Domain;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,13 +20,9 @@ namespace CodinoScannerApp
 
         public LoginPage()
         {
-            //Todo Need to add a way for users to set the IP here --- Shared preferences access / cfg file / i have no idea
-            _repo = new MongoRepository("localhost");
-            
             InitializeComponent();
             tbxPassword.Text = "";
             tbxUsername.Text = "";
-
             this.BindingContext = this;
             this.IsBusy = false;
             
@@ -34,18 +31,19 @@ namespace CodinoScannerApp
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
             this.IsBusy = true;
-            
+
+            var ip = Preferences.Get("server_ip", "localhost");
+            _repo = new MongoRepository(ip);
+
             try
             {
                 _employees = await _repo.GetEmployees();
             }
             catch (Exception)
             {
-                //Todo -- Add server IP method change here.
-                // //Dialog host for changing server IP is displayed here
-                // DialogHost.Close("LoginDialog", null);
-                // //Wait for user to finish setting new IP
-                // dhIpChange.IsOpen = true;
+                this.IsBusy = false;
+                var newIP = await DisplayPromptAsync("Error connecting to Server", "Please enter server IP");
+                Preferences.Set("server_ip", newIP);
                 return;
             }
 
