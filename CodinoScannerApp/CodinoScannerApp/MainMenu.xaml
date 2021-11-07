@@ -4,6 +4,8 @@
              x:Class="CodinoScannerApp.MainMenu"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              NavigationPage.HasNavigationBar="False">
+
+
     <ContentPage.Content>
 
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#393E46">

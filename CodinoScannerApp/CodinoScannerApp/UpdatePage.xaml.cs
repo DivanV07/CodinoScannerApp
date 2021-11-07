@@ -60,6 +60,9 @@ namespace CodinoScannerApp
 
                 await _repo.UpdateDocument(_currDoc);
                 await DisplayAlert("Success", "Document Successfully Updated", "Ok");
+                var mainmenu = new MainMenu(_repo);
+                NavigationPage.SetHasNavigationBar(mainmenu, false);
+                await Navigation.PushAsync(mainmenu);
             }
             else
             {
@@ -67,13 +70,23 @@ namespace CodinoScannerApp
             }
         }
 
-
+       
 
         protected override bool OnBackButtonPressed()
         {
-            var pages = Navigation.NavigationStack.ToList();
-            Navigation.RemovePage(pages[2]);
-            return base.OnBackButtonPressed();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alert", "Cancel Update?", "Yes", "No");
+            if (result == true)
+            {
+                    var mainmenu = new MainMenu(_repo);
+                    NavigationPage.SetHasNavigationBar(mainmenu, false);
+                  await  Navigation.PushAsync(mainmenu);
+
+                }
+
+        });
+            return true;
         }
     }
 }

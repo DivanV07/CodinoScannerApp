@@ -85,5 +85,21 @@ namespace CodinoScannerApp
                         }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            var mainmenu = new MainMenu(_repo);
+            NavigationPage.SetHasNavigationBar(mainmenu, false);
+            await Navigation.PushAsync(mainmenu);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+               
+
+            });
+            return true;
+        }
     }
 }

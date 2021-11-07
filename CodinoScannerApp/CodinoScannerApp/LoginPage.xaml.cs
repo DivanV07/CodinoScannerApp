@@ -15,6 +15,7 @@ namespace CodinoScannerApp
     {
         private IRepositoryInterface _repo;
         private List<Employee> _employees;
+        
 
         public LoginPage()
         {
@@ -22,10 +23,18 @@ namespace CodinoScannerApp
             _repo = new MongoRepository("localhost");
             
             InitializeComponent();
+            tbxPassword.Text = "";
+            tbxUsername.Text = "";
+
+            this.BindingContext = this;
+            this.IsBusy = false;
+            
         }
 
         private async void btnLogin_Clicked(object sender, EventArgs e)
         {
+            this.IsBusy = true;
+            
             try
             {
                 _employees = await _repo.GetEmployees();
@@ -55,22 +64,41 @@ namespace CodinoScannerApp
                     ///if login is successful
                     if (result)
                     {
+                        tbxPassword.Text = "";
+                        tbxUsername.Text = "";
                         _repo.SetLoggedInUser(employee);
                         var mainmenu = new MainMenu(_repo);
                         NavigationPage.SetHasNavigationBar(mainmenu, false);
                         await Navigation.PushAsync(mainmenu);
+                        this.IsBusy = false;
                     }
 
                 }
                 else
                 {
                     throw new Exception("Invalid Username");
+                    this.IsBusy = false;
                 }
             }
             catch (Exception)
             {
                 await DisplayAlert("Login Failed!", "Invalid Username or Password", "Try again");
+                this.IsBusy = false;
             }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alert", "Do you want to exit?", "Yes", "No");
+                if (result == true)
+                {
+                    System.Environment.Exit(0);
+                }
+
+            });
+            return true;
         }
     }
 }
