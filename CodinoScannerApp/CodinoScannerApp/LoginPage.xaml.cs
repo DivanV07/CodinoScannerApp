@@ -32,7 +32,7 @@ namespace CodinoScannerApp
         {
             this.IsBusy = true;
 
-            var ip = Preferences.Get("server_ip", "localhost");
+            var ip = Preferences.Get("server_ip", "192.168.2.181");
             _repo = new MongoRepository(ip);
 
             try
