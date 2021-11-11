@@ -21,7 +21,7 @@ namespace CodinoScannerApp.Domain
         {
             //todo change con string
             string connectionString =
-                $@"mongodb://admin:aPdP6AP3zCFER4t6hMPSLKsolAbFxOVzJ2PLuqRvAMZTMPo0Cs@{ipAddress}:40373/?authSource=admin&ssl=true";
+                $@"mongodb://admin:aPdP6AP3zCFER4t6hMPSLKsolAbFxOVzJ2PLuqRvAMZTMPo0Cs@{ipAddress}:27017/?authSource=admin&ssl=true";
             var url = new MongoUrl(connectionString);
 
             MongoClientSettings settings = MongoClientSettings.FromUrl(url);
